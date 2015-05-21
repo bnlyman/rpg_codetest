@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'pry'
+require 'rbrpg'
+puts "YO"
+
+::Rbrpg::Game.start
