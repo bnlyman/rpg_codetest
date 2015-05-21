@@ -12,7 +12,7 @@ module Rbrpg
     def screen
       @screen ||= Screen[
         RepeatingRow.new("-"),
-        Row.new("- CURRENT TURN: ##{game.turn.number.red}"),
+        # Row.new("- CURRENT TURN: ##{game.turn.number.red}"),
         # Row.new("- #{game.player.name}:", game.player.hero.health),
         RepeatingRow.new("-"),
         RepeatingRow.new(" "),
@@ -70,8 +70,6 @@ module Rbrpg
         self.class.superclass::LENGTH.times.map do |str|
           self << pattern
         end
-
-        binding.pry
 
         self[0..self.class.superclass::LENGTH]
       end

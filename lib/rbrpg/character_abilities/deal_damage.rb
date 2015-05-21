@@ -6,7 +6,7 @@ module Rbrpg
       end
 
       def resolve
-        @target.apply_damage(damage_amount)
+        @resolve ||= ::Rbrpg::Actions::ApplyDamage.new(targeter, target, damage_amount)
       end
     end
   end

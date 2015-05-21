@@ -7,6 +7,10 @@ module Rbrpg
       @hero = hero_class.new
       @name = name
     end
+    
+    def valid_targets
+      [@hero]
+    end
 
     private
 

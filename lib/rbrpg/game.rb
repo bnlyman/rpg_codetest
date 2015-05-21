@@ -2,7 +2,7 @@ module Rbrpg
   class Game
     COMPUTER_HERO_TYPE = :necromancer
 
-    attr_accessor :player, :computer
+    attr_accessor :player, :computer, :log, :display
 
     def self.start
       player_name = ask("Whats your name?") { |q| q.default = "Maximus" }
@@ -29,13 +29,14 @@ module Rbrpg
       ::Rbrpg::Computer.new(name: player_name, hero_type: hero_type)
     end
 
-    attr_accessor :current_turn
+    attr_accessor :current_turn, :turn
 
     def initialize(player, computer)
       @player = player
       @computer = computer
-      @log =
+      # @log = Log.new
       @display = ::Rbrpg::Renderer.new(self)
+      @display.draw
       @turn = Turn.start!(self)
     end
 

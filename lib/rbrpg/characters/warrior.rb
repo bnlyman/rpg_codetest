@@ -7,6 +7,11 @@ module Rbrpg
           :level => 1
         }
       end
+
+      def abilities
+        [ ::Rbrpg::CharacterAbilities::BasicAttack ]
+      end
+
     end
   end
 end

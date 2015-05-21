@@ -8,18 +8,17 @@ module Rbrpg
         @target = target
         @log = []
 
-        resolve
+        resolve_actions
       end
 
       def cast_text
         @cast_text ||= "#{@targeter.display_name} targets #{target.display_name} with #{self.display_name}"
       end
 
-      def resolve
+      def resolve_actions
         log << cast_text
-        log << @outcome = cast_resolution
+        log << resolve.to_s
       end
-
 
       def to_s
         log.map(&:join)

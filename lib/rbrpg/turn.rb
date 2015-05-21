@@ -19,10 +19,10 @@ module Rbrpg
     end
 
     def self.phases
-      @phases ||= [
-        ::TargetPhase,
-        ::AttackPhase
-      ]
+      @phases ||= {
+        :target => TargetPhase,
+        :attack => AttackPhase
+      }
     end
 
     def self.next_turn_number
@@ -31,15 +31,43 @@ module Rbrpg
 
     def self.start!(game)
       @game = game
+
+      new(1)
     end
+
+    def self.build_turn_phases
+      self.class.phases.dup.transform_values!{|klass|
+        klass.new()
+      }
+    end
+
+    attr_accessor :number, :phases
+
 
     def initialize(turn_number)
       @number = turn_number
-      @phase = Phases.first
+
+      @phases = self.class.phases.dup.transform_values!{|klass|
+        klass.new(self)
+      }
+
+      @current_phase = @phases[:target]
+
+      @phases[:target].resolve
+
+      @current_phase = @phases[:attack]
+
+      @phases[:attack].resolve
+    end
+
+    def game
+      self.class.game
     end
 
     class Phase
-      def initialize
+      def initialize(turn)
+        @turn = turn
+
         on_begin
         on_end
       end
@@ -47,30 +75,55 @@ module Rbrpg
       def actions
         @actions ||= []
       end
+
+      def resolve
+        actions.map(&:resolve)
+      end
+    end
+
+    class AttackPhase < Phase
+      def on_begin
+        puts "Attack Phase Begin"
+
+        @turn.phases[:target].actions.each do |action|
+          @actions << action.resolve
+        end
+      end
+
+      def on_end
+        puts "Attack Phase End"
+
+      end
     end
 
     class TargetPhase < Phase
       def on_begin
+        puts "Target Phase Begin"
         choose do |menu|
           menu.prompt = "Choose a target"
-          chosen_target = menu.choice(game.computer.valid_targets) { |target|
+          chosen_target = menu.choice(@turn.game.computer.valid_targets) { |target|
             say("Targeting #{target.class.name.demodulize}")
             target
-          end
-
-          chosen_ability = menu.choice(game.player.available_abilities) { |ability|
-            say("Targeting #{target.class.name.demodulize}")
-            target
-          end
-
-
+          }
 
         end
+
+        choose do |menu|
+          menu.prompt = "Choose an ability"
+          chosen_ability = menu.choice(@turn.game.player.hero.abilities) { |ability|
+            say("With #{ability.class.name.demodulize}")
+            ability
+          }
+        end
+
+        @actions << ::Rbrpg::Actions::TargetWithSkill.new(targeter: self.class.game.player.hero, target: chosen_target, description: ability.class.name.demodulize)
+      end
+
+      def on_end
+        puts "Target Phase End"
+
       end
     end
 
-    def phases
-
-    end
   end
 end

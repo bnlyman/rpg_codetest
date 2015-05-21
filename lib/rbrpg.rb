@@ -5,6 +5,8 @@ require "rbrpg/version"
 
 module Rbrpg
   extend ::ActiveSupport::Autoload
+  
+  autoload :Actions
   autoload :CharacterAbilities
   autoload :Characters
   autoload :Equipment

@@ -8,6 +8,16 @@ module Rbrpg
       @name = name
     end
 
+    def valid_targets
+      [ @hero ]
+    end
+
+    def valid_target_hash
+      valid_targets.each_with_object({}) do |result,obj|
+        result[obj.class.name.demodulize.underscore.to_sym] = obj
+      end
+    end
+
     private
 
     def hero_class
