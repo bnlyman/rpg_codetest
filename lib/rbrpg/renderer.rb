@@ -3,16 +3,16 @@ require 'colored'
 
 module Rbrpg
   class Renderer
-    attr_accessor :game
-
-    def initialize(game)
-      @game = game
+    attr_reader :game
+    def initialize
+      @log_line_observer = LogLineObserver.new
+      @game = ::Rbrpg::Game.current
     end
 
-    def screen
+    def screen(rows_to_append = [])
       @screen ||= Screen[
         RepeatingRow.new("-"),
-        # Row.new("- CURRENT TURN: ##{game.turn.number.red}"),
+        Row.new("- CURRENT TURN: ##{game.try(:current_turn).try(:number).try(:red)}"),
         # Row.new("- #{game.player.name}:", game.player.hero.health),
         RepeatingRow.new("-"),
         RepeatingRow.new(" "),
@@ -20,13 +20,15 @@ module Rbrpg
         Row.new("- PLAYER: #{game.player.name.red} - #{game.player.hero.class.name.demodulize.green}"),
         Row.new("- #{game.player.name}:", game.player.hero.health),
         RepeatingRow.new("-"),
-        RepeatingRow.new(" "),
         RepeatingRow.new(" ")
       ]
     end
 
+    def clear
+      system "clear" or system "cls"
+    end
+
     def draw
-      system "clear" or syetem "cls"
       puts screen.to_s
     end
 
@@ -72,6 +74,17 @@ module Rbrpg
         end
 
         self[0..self.class.superclass::LENGTH]
+      end
+    end
+
+    class LogLineObserver
+      def initialize
+        ::Rbrpg::Log.instance.add_observer(self)
+      end
+
+      def update(*args)
+        # Rbrpg::Renderer.draw
+        args.map(&:puts)
       end
     end
   end

@@ -1,6 +1,8 @@
 module Rbrpg
   module Characters
     class Character
+      include ::Rbrpg::Decorate
+      
       def self.default_properties
         {
           :health => 100,

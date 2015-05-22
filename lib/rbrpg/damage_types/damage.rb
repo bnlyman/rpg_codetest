@@ -5,6 +5,10 @@ module Rbrpg
         @amount = amount
         @type = type
       end
+
+      def __getobj__
+        @amount
+      end
     end
   end
 end

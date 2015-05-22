@@ -5,7 +5,6 @@ module Rbrpg
     autoload :Ability
     autoload :BasicAttack
     autoload :DealDamage
-
-
+    autoload :Traits
   end
 end
