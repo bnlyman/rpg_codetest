@@ -69,15 +69,15 @@ module Rbrpg
           choice
         end
 
-        binding.pry
-
-        choose do |menu|
+        chosen_target = choose do |menu|
           menu.prompt = "Select target for #{chosen_ability.display_name}"
-          chosen_target = menu.choice(*Rbrpg::Game.current.computer.valid_targets) { |target|
-            log.say("Targeting #{chosen_ability.class.name.demodulize} with #{target.class.name.demodulize}")
+          choice = menu.choice(*::Rbrpg::Game.current.computer.valid_targets) { |target|
+            log.say("Targeting #{chosen_ability.display_name} with #{target.display_name}")
             target
           }
         end
+
+        ::Rbrpg::Game.current.player.hero.cast(chosen_ability, :target => chosen_target)
 
         actions.map(&:resolve)
       end

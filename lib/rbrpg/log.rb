@@ -26,6 +26,7 @@ module Rbrpg
     end
 
     def <<(val)
+      changed
       notify_observers(val)
       super(val)
     end

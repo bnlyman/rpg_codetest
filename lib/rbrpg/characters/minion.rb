@@ -1,7 +1,7 @@
 module Rbrpg
   module Characters
     class Monster < Character
-      def self.default_attributes
+      def self.default_properties
         {
           :health => 100,
           :level => 10,

@@ -1,8 +1,8 @@
 module Rbrpg
   module Characters
     class Character
-      include ::Rbrpg::Decorate
-      
+      include ::Rbrpg::Decorated
+
       def self.default_properties
         {
           :health => 100,
@@ -12,7 +12,7 @@ module Rbrpg
 
       def self.inherited(subklass)
         super(subklass)
-        subklass.__send__("attr_reader", *subklass.default_properties.keys)
+        subklass.__send__("attr_accessor", *subklass.default_properties.keys) if subklass.respond_to?(:default_properties)
       end
 
       def initialize
@@ -26,7 +26,13 @@ module Rbrpg
       end
 
       def apply_damage(damage)
-        health -= damage
+        self.health -= damage
+        binding.pry
+        self
+      end
+
+      def cast(ability_class, target:)
+        ability_class.new(self, target)
       end
 
       def apply_experience

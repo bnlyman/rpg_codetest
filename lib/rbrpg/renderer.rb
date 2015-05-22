@@ -9,7 +9,7 @@ module Rbrpg
       @game = ::Rbrpg::Game.current
     end
 
-    def screen(rows_to_append = [])
+    def screen
       @screen ||= Screen[
         RepeatingRow.new("-"),
         Row.new("- CURRENT TURN: ##{game.try(:current_turn).try(:number).try(:red)}"),
@@ -17,7 +17,7 @@ module Rbrpg
         RepeatingRow.new("-"),
         RepeatingRow.new(" "),
         RepeatingRow.new("-"),
-        Row.new("- PLAYER: #{game.player.name.red} - #{game.player.hero.class.name.demodulize.green}"),
+        Row.new("- PLAYER: #{game.player.name.red} - #{game.player.hero.display_name.green}"),
         Row.new("- #{game.player.name}:", game.player.hero.health),
         RepeatingRow.new("-"),
         RepeatingRow.new(" ")
@@ -83,8 +83,9 @@ module Rbrpg
       end
 
       def update(*args)
-        # Rbrpg::Renderer.draw
-        args.map(&:puts)
+        ::Rbrpg::Game.current.display.clear
+        ::Rbrpg::Game.current.display.draw
+        args.map{|arg| puts arg.yellow }
       end
     end
   end

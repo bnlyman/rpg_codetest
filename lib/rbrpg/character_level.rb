@@ -1,5 +1,7 @@
 module Rbrpg
   class CharacterLevel
+    attr_accessor :number
+
     EXPERIENCE_TO_REACH_LEVEL = {
       1 => 100,
       2 => 200,
@@ -27,7 +29,7 @@ module Rbrpg
     end
 
     def self.level_range
-      (1..10).map{ new(number) }
+      (1..10).map{ |num| new(num) }
     end
 
     def self.[](experience)

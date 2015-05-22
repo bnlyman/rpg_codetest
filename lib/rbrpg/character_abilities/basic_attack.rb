@@ -1,14 +1,16 @@
 module Rbrpg
   module CharacterAbilities
-    class BasicAttack
+    class BasicAttack < Ability
+      include ::Rbrpg::Decorated
       include ::Rbrpg::CharacterAbilities::Traits::DealsDamage
+
+      def initialize(*args)
+        super(*args)
+        @description ||= "#{source.display_name}, hits #{target.display_name} for #{damage.amount}"
+      end
 
       def damage_source
         @source.weapon
-      end
-
-      def description
-        @description ||= "#{source.name}, hits #{target.name} for #{damage.amount}"
       end
     end
   end

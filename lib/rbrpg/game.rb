@@ -2,8 +2,6 @@ module Rbrpg
   class Game
     COMPUTER_HERO_TYPE = :necromancer
 
-
-
     class << self
       attr_accessor :current
     end
@@ -21,7 +19,7 @@ module Rbrpg
 
       @current = new(
         build_player(player_name, selected_hero_type),
-        build_computer('Megatron', COMPUTER_HERO_TYPE)
+        build_computer('Computer', COMPUTER_HERO_TYPE)
       )
 
       @current.start
@@ -41,8 +39,14 @@ module Rbrpg
       @player = player
       @computer = computer
       @log = ::Rbrpg::Log.instance
+    end
 
-      # start_turn
+    def finished?
+      @player.health < 1 || @computer.health < 1
+    end
+
+    def start_turn
+      turns << Turn.start
     end
 
     def start
@@ -51,15 +55,6 @@ module Rbrpg
       @display.draw
 
       start_turn
-    end
-
-
-    def finished?
-      @player.health < 1 || @computer.health < 1
-    end
-
-    def start_turn
-      @turns << Turn.start
     end
 
     def turns

@@ -10,12 +10,14 @@ module Rbrpg
   autoload :Actions
   autoload :CharacterAbilities
   autoload :Characters
-  autoload :Decorate
+  autoload :CharacterLevel
+  autoload :Decorated
   autoload :Equipment
   autoload :Game
   autoload :Log
   autoload :Computer
   autoload :Player
   autoload :Renderer
+  autoload :SkillTrees
   autoload :Turn
 end

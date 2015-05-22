@@ -1,10 +1,12 @@
 module Rbrpg
-  module Items
+  module Equipment
     class Weapon < Item
+      include ::Rbrpg::Decorated
+      
       def self.default_properties
         {
-          :damage_low_amount,
-          :damage_high_amount
+          :damage_low_amount => 10,
+          :damage_high_amount => 20
         }
       end
 

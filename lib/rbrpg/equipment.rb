@@ -1,5 +1,9 @@
 module Rbrpg
-  class Equipment
+  module Equipment
+    extend ::ActiveSupport::Autoload
 
+    autoload :Item
+    autoload :Sword
+    autoload :Weapon
   end
 end

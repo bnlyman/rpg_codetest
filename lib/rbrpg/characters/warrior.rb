@@ -1,17 +1,16 @@
 module Rbrpg
   module Characters
-    class Warrior < Hero
-      def self.default_attributes
+    class Warrior < PlayerHero
+      def self.default_properties
         {
           :health => 12_500,
           :level => 1
         }
       end
 
-      def abilities
-        [ ::Rbrpg::CharacterAbilities::BasicAttack ]
+      def weapon
+        @weapon ||= ::Rbrpg::Equipment::Sword.new
       end
-
     end
   end
 end
