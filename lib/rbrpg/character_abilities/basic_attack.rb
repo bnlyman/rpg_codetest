@@ -6,7 +6,7 @@ module Rbrpg
 
       def initialize(*args)
         super(*args)
-        @description ||= "#{source.display_name}, hits #{target.display_name} for #{damage.amount}"
+        @description ||= "#{source.display_name}, hits #{target.display_name} for #{damage}"
       end
 
       def damage_source

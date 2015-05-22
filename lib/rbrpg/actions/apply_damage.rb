@@ -5,6 +5,5 @@ module Rbrpg
         @target.apply_damage(@amount)
       end
     end
-    
   end
 end

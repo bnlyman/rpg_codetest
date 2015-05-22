@@ -27,7 +27,6 @@ module Rbrpg
 
       def apply_damage(damage)
         self.health -= damage
-        binding.pry
         self
       end
 

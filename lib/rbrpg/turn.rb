@@ -103,10 +103,8 @@ module Rbrpg
       end
 
       def finish
-        log.say("Compiuter Action Phase End")
+        log.say("Computer Action Phase End")
       end
     end
-
-
   end
 end

@@ -10,18 +10,21 @@ module Rbrpg
     end
 
     def screen
-      @screen ||= Screen[
+      [
         RepeatingRow.new("-"),
         Row.new("- CURRENT TURN: ##{game.try(:current_turn).try(:number).try(:red)}"),
-        # Row.new("- #{game.player.name}:", game.player.hero.health),
         RepeatingRow.new("-"),
         RepeatingRow.new(" "),
         RepeatingRow.new("-"),
         Row.new("- PLAYER: #{game.player.name.red} - #{game.player.hero.display_name.green}"),
-        Row.new("- #{game.player.name}:", game.player.hero.health),
+        Row.new("- HEALTH:", game.player.hero.health),
+        RepeatingRow.new("-"),
+        RepeatingRow.new(" "),
+        Row.new("- Computer: #{game.computer.name.blue} - #{game.computer.hero.display_name.green}"),
+        Row.new("- HEALTH:", game.computer.hero.health),
         RepeatingRow.new("-"),
         RepeatingRow.new(" ")
-      ]
+      ].join("\n")
     end
 
     def clear
@@ -39,7 +42,7 @@ module Rbrpg
     end
 
     class Row < String
-      LENGTH = 64
+      LENGTH = 86
 
       def initialize(*tokens)
         if tokens.length && tokens.is_a?(Array)
@@ -85,7 +88,7 @@ module Rbrpg
       def update(*args)
         ::Rbrpg::Game.current.display.clear
         ::Rbrpg::Game.current.display.draw
-        args.map{|arg| puts arg.yellow }
+        args.map{ |arg| puts arg.yellow }
       end
     end
   end
