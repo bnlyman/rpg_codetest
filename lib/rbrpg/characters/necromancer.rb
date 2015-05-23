@@ -1,11 +1,10 @@
 module Rbrpg
   module Characters
-    class Necromancer < ComputerHero
-      def self.default_properties
-        {
-          :health => 100_000,
-          :experience_point_reward => 20_000
-        }
+    class Necromancer < Hero
+      def initialize
+        @health = 10000
+        
+        super
       end
 
       def weapon

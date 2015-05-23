@@ -1,11 +1,10 @@
 module Rbrpg
   module Characters
-    class Warrior < PlayerHero
-      def self.default_properties
-        {
-          :health => 12_500,
-          :level => 1
-        }
+    class Warrior < Hero
+      def initialize
+        @health = 12_500
+
+        super
       end
 
       def weapon
