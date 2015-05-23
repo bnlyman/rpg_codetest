@@ -1,10 +1,8 @@
+require 'rbrpg/character_abilities/ability'
+require 'rbrpg/character_abilities/basic_attack'
+require 'rbrpg/character_abilities/traits'
+
 module Rbrpg
   module CharacterAbilities
-    extend ::ActiveSupport::Autoload
-
-    autoload :Ability
-    autoload :BasicAttack
-    autoload :DealDamage
-    autoload :Traits
   end
 end

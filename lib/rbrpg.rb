@@ -4,20 +4,20 @@ require "highline/import"
 require 'observer'
 require "rbrpg/version"
 
-module Rbrpg
-  extend ::ActiveSupport::Autoload
+require 'rbrpg/character_abilities'
+require 'rbrpg/characters'
+require 'rbrpg/character_level'
+require 'rbrpg/decorated'
+require 'rbrpg/equipment'
+require 'rbrpg/game'
+require 'rbrpg/game_state_observer'
+require 'rbrpg/log'
+require 'rbrpg/computer'
+require 'rbrpg/player'
+require 'rbrpg/renderer'
+require 'rbrpg/skill_trees'
+require 'rbrpg/turn'
 
-  autoload :Actions
-  autoload :CharacterAbilities
-  autoload :Characters
-  autoload :CharacterLevel
-  autoload :Decorated
-  autoload :Equipment
-  autoload :Game
-  autoload :Log
-  autoload :Computer
-  autoload :Player
-  autoload :Renderer
-  autoload :SkillTrees
-  autoload :Turn
+module Rbrpg
+
 end

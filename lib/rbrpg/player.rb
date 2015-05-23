@@ -1,7 +1,7 @@
 module Rbrpg
   class Player
     include ::Rbrpg::Decorated
-    
+
     attr_accessor :hero, :name
 
     def initialize(hero_type:, name:)

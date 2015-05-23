@@ -2,6 +2,7 @@ module Rbrpg
   module Characters
     class Character
       include ::Rbrpg::Decorated
+      include ::Observable
 
       def self.default_properties
         {
@@ -12,7 +13,13 @@ module Rbrpg
 
       def self.inherited(subklass)
         super(subklass)
-        subklass.__send__("attr_accessor", *subklass.default_properties.keys) if subklass.respond_to?(:default_properties)
+
+        if subklass.respond_to?(:default_properties)
+          subklass.default_properties.keys.each do |k|
+            attr_reader(k)
+            attr_writer "#{k}" unless subklass.instance_methods.include?("#{k}=")
+          end
+        end
       end
 
       def initialize
@@ -26,12 +33,23 @@ module Rbrpg
       end
 
       def apply_damage(damage)
-        self.health -= damage
+        self.health= (self.health - damage)
         self
       end
 
       def cast(ability_class, target:)
         ability_class.new(self, target)
+        changed(true)
+        notify_observers(self, :cast, [self.display_name, "casts", ability_class.display_name, "at", target].join(" "))
+      end
+
+      ### the changed & notify_observers methods  come from the observable module
+      #http://ruby-doc.org/stdlib-1.9.3/libdoc/observer/rdoc/Observable.html
+      def health=(new_value)
+        event_name = self.health > new_value ? :healed : :hit
+        changed(true)
+        super(new_value)
+        notifiy_observers(self, event_name, [record.display_name, "was", event_name, "for", new_value].join(" "))
       end
 
       def apply_experience

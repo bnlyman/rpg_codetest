@@ -5,16 +5,14 @@ module Rbrpg
   class Renderer
     attr_reader :game
     def initialize
-      @log_line_observer = LogLineObserver.new
+      @game_state_observer = GameStateObserver.new
       @game = ::Rbrpg::Game.current
     end
 
     def screen
       [
         RepeatingRow.new("-"),
-        Row.new("- CURRENT TURN: ##{game.try(:current_turn).try(:number).try(:red)}"),
-        RepeatingRow.new("-"),
-        RepeatingRow.new(" "),
+        Row.new("- CURRENT TURN: #{'#'.yellow} #{game.current_turn_number.to_s.red}"),
         RepeatingRow.new("-"),
         Row.new("- PLAYER: #{game.player.name.red} - #{game.player.hero.display_name.green}"),
         Row.new("- HEALTH:", game.player.hero.health),
@@ -23,6 +21,7 @@ module Rbrpg
         Row.new("- Computer: #{game.computer.name.blue} - #{game.computer.hero.display_name.green}"),
         Row.new("- HEALTH:", game.computer.hero.health),
         RepeatingRow.new("-"),
+        RepeatingRow.new(" "),
         RepeatingRow.new(" ")
       ].join("\n")
     end
@@ -33,12 +32,6 @@ module Rbrpg
 
     def draw
       puts screen.to_s
-    end
-
-    class Screen < Matrix
-      def to_s
-        rows.map(&:join)
-      end
     end
 
     class Row < String
@@ -77,18 +70,6 @@ module Rbrpg
         end
 
         self[0..self.class.superclass::LENGTH]
-      end
-    end
-
-    class LogLineObserver
-      def initialize
-        ::Rbrpg::Log.instance.add_observer(self)
-      end
-
-      def update(*args)
-        ::Rbrpg::Game.current.display.clear
-        ::Rbrpg::Game.current.display.draw
-        args.map{ |arg| puts arg.yellow }
       end
     end
   end

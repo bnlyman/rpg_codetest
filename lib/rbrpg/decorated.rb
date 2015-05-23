@@ -3,9 +3,7 @@ module Rbrpg
     extend ::ActiveSupport::Concern
 
     def display_name
-
-      # try(:name){|str| str.demodulize.titleize } || self.class.name
-      self.class.name
+      self.class.display_name
     end
 
     module ClassMethods

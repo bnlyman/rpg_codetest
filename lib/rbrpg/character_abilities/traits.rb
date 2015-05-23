@@ -1,9 +1,8 @@
+require 'rbrpg/character_abilities/traits/deals_damage'
+
 module Rbrpg
   module CharacterAbilities
     module Traits
-      extend ::ActiveSupport::Autoload
-
-      autoload :DealsDamage
     end
   end
 end

@@ -1,3 +1,4 @@
+require 'rbrpg/decorated'
 module Rbrpg
   module CharacterAbilities
     class Ability < SimpleDelegator
@@ -8,6 +9,7 @@ module Rbrpg
       def initialize(source, target)
         @source = source
         @target = target
+
         resolve
       end
 

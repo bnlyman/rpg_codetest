@@ -7,6 +7,10 @@ module Rbrpg
           :experience_point_reward => 20_000
         }
       end
+
+      def weapon
+        @weapon ||= ::Rbrpg::Equipment::Staff.new
+      end
     end
   end
 end

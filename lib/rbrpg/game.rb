@@ -41,11 +41,15 @@ module Rbrpg
       @log = ::Rbrpg::Log.instance
     end
 
-    def finished?
-      @player.health < 1 || @computer.health < 1
+    def current_turn_number
+      turns.length + 1
     end
 
-    def start_turn
+    def finished?
+      @player.hero.health < 1 || @computer.hero.health < 1
+    end
+
+    def next_turn
       turns << Turn.start
     end
 
@@ -54,7 +58,9 @@ module Rbrpg
       @display.clear
       @display.draw
 
-      start_turn
+      until finished?
+        next_turn
+      end
     end
 
     def turns

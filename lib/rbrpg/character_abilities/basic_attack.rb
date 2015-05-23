@@ -1,3 +1,6 @@
+require 'rbrpg/decorated'
+require 'rbrpg/character_abilities/traits/deals_damage'
+
 module Rbrpg
   module CharacterAbilities
     class BasicAttack < Ability
@@ -6,7 +9,6 @@ module Rbrpg
 
       def initialize(*args)
         super(*args)
-        @description ||= "#{source.display_name}, hits #{target.display_name} for #{damage}"
       end
 
       def damage_source
