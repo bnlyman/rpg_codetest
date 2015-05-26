@@ -4,7 +4,7 @@ module Rbrpg
       def skills
         super + [
           ::Rbrpg::CharacterAbilities::BasicAttack,
-          ::Rbrpg::CharacterAbilities::ShieldBash
+          ::Rbrpg::CharacterAbilities::Bash
         ]
       end
     end

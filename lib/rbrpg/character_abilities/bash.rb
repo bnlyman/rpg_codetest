@@ -3,7 +3,7 @@ require 'rbrpg/character_abilities/traits/deals_damage'
 
 module Rbrpg
   module CharacterAbilities
-    class ShieldBash < Ability
+    class Bash < Ability
       include ::Rbrpg::Decorated
       include ::Rbrpg::CharacterAbilities::Traits::DealsDamage
 
