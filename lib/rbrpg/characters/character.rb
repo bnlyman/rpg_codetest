@@ -15,15 +15,16 @@ module Rbrpg
       end
 
       def apply_damage(damage)
-        binding.pry
         self.health = (self.health - damage)
-        notify_observers(self, damage, [self.display_name, "was", "hit", "for", damage].join(" "))
+        changed(true)
+        notify_observers(self, :hit, [self.display_name, "was hit for", damage].join(" "))
         self
       end
 
-      def apply_healing
+      def apply_healing(healing)
         self.health = (self.health + healing)
-        notify_observers(self, healing, [self.display_name, "was", "healed", "for", healing].join(" "))
+        changed(true)
+        notify_observers(self, :healed, [self.display_name, "was healed for", healing].join(" "))
         self
       end
 
@@ -39,7 +40,7 @@ module Rbrpg
         change_amount = health - new_value
         changed(true)
         @health = new_value
-        notify_observers(self, event_name, [self.display_name + "'s", "health", "is", "now", new_value].join(" "))
+        notify_observers(self, :healed, [self.display_name + "'s health is now", new_value].join(" "))
       end
 
       def apply_experience
