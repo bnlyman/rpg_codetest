@@ -1,4 +1,5 @@
 require 'rbrpg/decorated'
+
 module Rbrpg
   module CharacterAbilities
     class Ability < SimpleDelegator

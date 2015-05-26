@@ -29,6 +29,12 @@ module Rbrpg
         self
       end
 
+      def consume_mana(mana_amount)
+        self.mana = (self.mana - mana_amount)
+        changed(true)
+        notify_observers(self, :hit, [self.display_name, "consumed", mana_amount, "mana"].join(" "))
+      end
+
       def cast(ability_class, target:)
         ability_class.new(self, target)
         changed(true)
