@@ -3,7 +3,8 @@ module Rbrpg
     class Warrior < ::Rbrpg::SkillTrees::Tree
       def skills
         super + [
-          ::Rbrpg::CharacterAbilities::BasicAttack
+          ::Rbrpg::CharacterAbilities::BasicAttack,
+          ::Rbrpg::CharacterAbilities::ShieldBash
         ]
       end
     end

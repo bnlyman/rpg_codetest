@@ -3,6 +3,7 @@ module Rbrpg
     extend ::ActiveSupport::Autoload
 
     autoload :Item
+    autoload :Shield
     autoload :Staff
     autoload :Sword
     autoload :Weapon
