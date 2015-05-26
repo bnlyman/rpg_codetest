@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jason Ayre"]
   spec.email         = ["jasonayre@gmail.com"]
 
-  spec.summary       = "Write a short summary, because Rubygems requires one."
-  spec.description   = "Write a longer description or delete this line."
-  spec.homepage      = "https://github.com/jasonayre/rpg_codetest"
+  spec.summary       = "Write a short summart, because Rubygems requiers one."
+  spec.description   = "Write a longer description or delete this line."
+  spec.homepage      = "https://github.com/jasonayre/rpg_codetest"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
