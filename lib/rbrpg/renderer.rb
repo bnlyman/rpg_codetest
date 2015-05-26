@@ -16,10 +16,12 @@ module Rbrpg
         RepeatingRow.new("-"),
         Row.new("- PLAYER: #{game.player.name.red} - #{game.player.hero.display_name.green}"),
         Row.new("- HEALTH:", game.player.hero.health),
+        Row.new("- MANA:", game.player.hero.mana),
         RepeatingRow.new("-"),
         RepeatingRow.new(" "),
         Row.new("- Computer: #{game.computer.name.blue} - #{game.computer.hero.display_name.green}"),
         Row.new("- HEALTH:", game.computer.hero.health),
+        Row.new("- MANA:", game.computer.hero.mana),
         RepeatingRow.new("-"),
         RepeatingRow.new(" "),
         RepeatingRow.new(" ")

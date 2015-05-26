@@ -8,6 +8,7 @@ module Rbrpg
 
       def initialize
         @health ||= 100
+        @mana ||= 100
       end
 
       def alive?
