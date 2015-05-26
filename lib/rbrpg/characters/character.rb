@@ -4,7 +4,7 @@ module Rbrpg
       include ::Rbrpg::Decorated
       include ::Observable
 
-      attr_accessor :health, :experience_points
+      attr_accessor :health, :mana, :experience_points
 
       def initialize
         @health ||= 100
