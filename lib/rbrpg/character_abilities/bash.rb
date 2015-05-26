@@ -14,7 +14,7 @@ module Rbrpg
       end
 
       def mana_cost
-        20
+        mana_amount = 20
       end
 
       def damage_source

@@ -5,7 +5,7 @@ module Rbrpg
         extend ::ActiveSupport::Concern
 
         def mana_amount
-          @mana_amount ||= mana_cost
+          @mana_amount ||= mana_amount
         end
 
         def resolve
