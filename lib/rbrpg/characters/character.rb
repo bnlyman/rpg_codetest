@@ -54,7 +54,7 @@ module Rbrpg
         change amount = mana - new_value
         changed(true)
         @mana = new_value
-        notify_observers(self, :hit, [self.display_name, "consumed", change_amount, "mana"].join(" "))
+        notify_observers(self, :healed, [self.display_name, "'s mana is now'", new_value].join(" "))
       end
 
       def apply_experience
